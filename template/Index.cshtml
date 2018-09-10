@@ -1,0 +1,36 @@
+﻿@using AbpSimpleCRUD.Web.Startup
+@model AbpSimpleCRUD.Web.Models.Clients.ClientListViewModel
+@{
+    ViewBag.CurrentPageName = PageNames.Clients;
+}
+
+<h2>index</h2>
+
+<a asp-action="Create">Create New</a>
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@L("FirstName")</th>
+                <th>@L("LastName")</th>
+                <th>@L("Age")</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var client in Model.Clients)
+            {
+                <tr>
+                    <td>@client.FirstName</td>
+                    <td>@client.LastName</td>
+                    <td>@client.Age</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@client.Id">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@client.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
