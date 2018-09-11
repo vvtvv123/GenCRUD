@@ -1,0 +1,16 @@
+{
+  "version": "0.2.1",
+  "defaults": {},
+  "configurations": [
+    {
+      "type": "python",
+      "interpreter": "(default)",
+      "interpreterArguments": "",
+      "scriptArguments": "-f model.txt  -p FirstMVC -d abc",
+      "nativeDebug": false,
+      "webBrowserUrl": "",
+      "project": "gen_template.py",
+      "name": "gen_template.py"
+    }
+  ]
+}
