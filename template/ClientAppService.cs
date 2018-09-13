@@ -1,53 +1,53 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Abp.AutoMapper;
-using AbpSimpleCRUD.Clients.Dtos;
-using AbpSimpleCRUD.Domain.Clients;
+using {{ project }}.{{ model }}s.Dtos;
+using {{ project }}.Domain.{{ model }}s;
 
-namespace AbpSimpleCRUD.Clients
+namespace {{ project }}.{{ model }}s
 {
-    public class ClientAppService : IClientAppService
+    public class {{ model }}AppService : I{{ model }}AppService
     {
-        private IClientManager _clientManager;
+        private I{{ model }}Manager _{{ model }}Manager;
 
-        public ClientAppService(IClientManager clientManager)
+        public {{ model }}AppService(I{{ model }}Manager {{ model }}Manager)
         {
-            _clientManager = clientManager;
+            _{{ model }}Manager = {{ model }}Manager;
         }
 
         //[HttpPost]
-        public async Task<CreateClientOutput> CreateClient(CreateClientInput input)
+        public async Task<Create{{ model }}Output> Create{{ model }}(Create{{ model }}Input input)
         {
-            var client = input.MapTo<Client>();
-            var createdClientId = await _clientManager.Create(client);
-            return new CreateClientOutput { Id = createdClientId };
+            var {{ model }} = input.MapTo<{{ model }}>();
+            var created{{ model }}Id = await _{{ model }}Manager.Create({{ model }});
+            return new Create{{ model }}Output { Id = created{{ model }}Id };
         }
 
-        public async Task DeleteClient(long id)
+        public async Task Delete{{ model }}(long id)
         {
-            await _clientManager.Delete(id);
+            await _{{ model }}Manager.Delete(id);
         }
 
-        public async Task<GetAllClientsOutput> GetAllClients()
+        public async Task<GetAll{{ model }}sOutput> GetAll{{ model }}s()
         {
-            var clients = await _clientManager.GetAll();
-            return new GetAllClientsOutput
+            var {{ model }}s = await _{{ model }}Manager.GetAll();
+            return new GetAll{{ model }}sOutput
             {
-                Clients = clients.MapTo<List<GetAllClientsItem>>()
+                {{ model }}s = {{ model }}s.MapTo<List<GetAll{{ model }}sItem>>()
             };
         }
 
-        public async Task<GetClientByIdOutput> GetById(long id)
+        public async Task<Get{{ model }}ByIdOutput> GetById(long id)
         {
-            var client = await _clientManager.GetById(id);
-            return client.MapTo<GetClientByIdOutput>();
+            var {{ model }} = await _{{ model }}Manager.GetById(id);
+            return {{ model }}.MapTo<Get{{ model }}ByIdOutput>();
         }
 
-        public async Task<UpdateClientOutput> UpdateClient(UpdateClientInput input)
+        public async Task<Update{{ model }}Output> Update{{ model }}(Update{{ model }}Input input)
         {
-            var client = input.MapTo<Client>();
-            var clientUpdated = await _clientManager.Update(client);
-            return clientUpdated.MapTo<UpdateClientOutput>();
+            var {{ model }} = input.MapTo<{{ model }}>();
+            var {{ model }}Updated = await _{{ model }}Manager.Update({{ model }});
+            return {{ model }}Updated.MapTo<Update{{ model }}Output>();
         }
     }
 }

@@ -3,7 +3,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace {{ project }}.Domain.{{ model }}s
+namespace {{ project }}.{{ model }}s
 {
     [Table("{{ model }}s")]
     public class {{ model }} : FullAuditedEntity<long>

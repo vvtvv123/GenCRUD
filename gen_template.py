@@ -63,14 +63,26 @@ def parse_model(file):
    
     return model, vars, maxlen, required
 
-def gen_model(j2_env, model, vars, maxlen, required, project):
-    print(j2_env.get_template('Client.cs').render(
+def gen_model(j2_env, model, vars, maxlen, required, project, filename):
+    return j2_env.get_template(filename).render(
         project = project,
         model = model,
         maxlen = maxlen,
         vars = vars,
         required = required
-    ))
+    )
+
+def check_dir(path):
+    if not os.path.exists(path):
+        raise Exception
+
+def touch_file(string, path, file):
+    new_file = os.path.join(path, file)    
+    if not os.path.exists(path):
+        os.makedirs(path)
+    with open(new_file, 'wb') as f:
+        content = f.write(string.encode("utf-8"))
+    print("write %s" % new_file)
 
 if __name__ == '__main__':
 
@@ -88,5 +100,13 @@ if __name__ == '__main__':
 
     project = args.project
     model, vars, maxlen, required = parse_model(args.model)
-    gen_model(j2_env, model, vars, maxlen, required, project)
 
+    # verify dirs
+    core_path = os.path.join(args.path, args.project+'.Core', model+"s")
+    check_dir(os.path.join(args.path, args.project+'.Core'))
+    content = gen_model(j2_env, model, vars, maxlen, required, project, 'Client.cs')
+    touch_file(content, core_path, model+".cs")
+    content = gen_model(j2_env, model, vars, maxlen, required, project, 'IClientManager.cs')
+    touch_file(content, core_path, "I"+model+"Manager.cs")
+    content = gen_model(j2_env, model, vars, maxlen, required, project, 'ClientManager.cs')
+    touch_file(content, core_path, model+"Manager.cs")

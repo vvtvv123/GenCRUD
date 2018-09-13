@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AbpSimpleCRUD.Domain.Clients
+namespace {{ project }}.{{ model }}s
 {
-    public interface IClientManager
+    public interface I{{ model }}Manager
     {
-        Task<long> Create(Client client);
-        Task<Client> Update(Client client);
+        Task<long> Create({{ model }} instance);
+        Task<{{ model }}> Update({{ model }} instance);
         Task Delete(long id);
-        Task<Client> GetById(long id);
-        Task<List<Client>> GetAll();
+        Task<{{ model }}> GetById(long id);
+        Task<List<{{ model }}>> GetAll();
     }
 }

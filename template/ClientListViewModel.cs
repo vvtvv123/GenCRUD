@@ -1,11 +1,11 @@
-﻿using AbpSimpleCRUD.Clients.Dtos;
+﻿using {{ project }}.{{ model }}s.Dtos;
 using System.Collections.Generic;
 
 
-namespace AbpSimpleCRUD.Web.Models.Clients
+namespace {{ project }}.Web.Models.{{ model }}s
 {
-    public class ClientListViewModel
+    public class {{ model }}ListViewModel
     {
-        public IReadOnlyList<GetAllClientsItem> Clients { get; set; }
+        public IReadOnlyList<GetAll{{ model }}sItem> {{ model }}s { get; set; }
     }
 }

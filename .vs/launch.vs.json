@@ -6,7 +6,7 @@
       "type": "python",
       "interpreter": "(default)",
       "interpreterArguments": "",
-      "scriptArguments": "-f model.txt  -p FirstMVC -d abc",
+      "scriptArguments": "-f model.txt  -p FirstMVC -d C:\\code\\FirstMVC\\4.0.1\\aspnet-core\\src",
       "nativeDebug": false,
       "webBrowserUrl": "",
       "project": "gen_template.py",
