@@ -101,12 +101,29 @@ if __name__ == '__main__':
     project = args.project
     model, vars, maxlen, required = parse_model(args.model)
 
-    # verify dirs
-    core_path = os.path.join(args.path, args.project+'.Core', model+"s")
-    check_dir(os.path.join(args.path, args.project+'.Core'))
-    content = gen_model(j2_env, model, vars, maxlen, required, project, 'Client.cs')
-    touch_file(content, core_path, model+".cs")
-    content = gen_model(j2_env, model, vars, maxlen, required, project, 'IClientManager.cs')
-    touch_file(content, core_path, "I"+model+"Manager.cs")
-    content = gen_model(j2_env, model, vars, maxlen, required, project, 'ClientManager.cs')
-    touch_file(content, core_path, model+"Manager.cs")
+    # file map, for GRUD, this reflects the basic code we have to create
+    file_map = {
+        '.Core': ['Client.cs', 'IClientManager.cs', 'ClientManager.cs'],
+        '.Application': ['ClientAppService.cs', 'IClientAppService.cs']        
+    }
+
+    special = {
+        '.Application\\'+model+'s\\Dtos': ['CreateClientInput.cs', 'CreateClientOutput.cs', 'GetAllClientsItem.cs',
+                              'GetAllClientsOutput.cs', 'GetClientByIdOutput.cs', 'UpdateClientInput.cs',
+                              'UpdateClientOutput.cs']
+    }
+
+    for dir in file_map:
+        path = os.path.join(args.path, args.project+dir, model+"s")
+        print(path)
+        check_dir(os.path.join(args.path, args.project+dir))
+        for ff in file_map[dir]:
+            content = gen_model(j2_env, model, vars, maxlen, required, project, ff)
+            touch_file(content, path, str.replace(ff, 'Client', model))
+
+    for dir in special:
+        path = os.path.join(args.path, args.project+dir)
+        print(path)        
+        for ff in special[dir]:
+            content = gen_model(j2_env, model, vars, maxlen, required, project, ff)
+            touch_file(content, path, str.replace(ff, 'Client', model))

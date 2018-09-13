@@ -1,11 +1,11 @@
-﻿namespace AbpSimpleCRUD.Clients.Dtos
+﻿using System;
+
+namespace  {{ project }}.{{ model }}s.Dtos
 {
-    public class CreateClientInput
+    public class Create{{ model }}Input
     {
-        public string FirstName { get; set; }
-
-        public string LastName { get; set; }
-
-        public int Age { get; set; }
+        {% for k,v in vars.items() %}
+        public {{ v }} {{ k }} { get; set;}
+        {% endfor %}
     }
 }

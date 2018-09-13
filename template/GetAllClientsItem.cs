@@ -3,14 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AbpSimpleCRUD.Clients.Dtos
+namespace {{ project }}.{{ model }}s.Dtos
 {
-    public class GetAllClientsItem : EntityDto<long>
+    public class GetAll{{ model }}sItem : EntityDto<long>
     {
-        public string FirstName { get; set; }
-
-        public string LastName { get; set; }
-
-        public int Age { get; set; }
+        {% for k,v in vars.items() %}
+        public {{ v }} {{ k }} { get; set;}
+        {% endfor %}
     }
 }

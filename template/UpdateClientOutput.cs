@@ -1,13 +1,12 @@
 ﻿using Abp.Application.Services.Dto;
+using System;
 
-namespace AbpSimpleCRUD.Clients.Dtos
+namespace {{ project }}.{{ model }}s.Dtos
 {
-    public class UpdateClientOutput : EntityDto<long>
+    public class Update{{ model }}Output : EntityDto<long>
     {
-        public string FirstName { get; set; }
-
-        public string LastName { get; set; }
-
-        public int Age { get; set; }
+        {% for k,v in vars.items() %}
+        public {{ v }} {{ k }} { get; set;}
+        {% endfor %}
     }
 }

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 
-namespace AbpSimpleCRUD.Clients.Dtos
+namespace {{ project }}.{{ model }}s.Dtos
 {
-    public class GetAllClientsOutput
+    public class GetAll{{ model }}sOutput
     {
-        public List<GetAllClientsItem> Clients { get; set; }
+        public List<GetAll{{ model }}sItem> {{ model }}s { get; set; }
     }
 }

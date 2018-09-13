@@ -1,8 +1,8 @@
 ﻿using Abp.Application.Services.Dto;
 
-namespace AbpSimpleCRUD.Clients.Dtos
+namespace {{ project }}.{{ model }}s.Dtos
 {
-    public class CreateClientOutput : EntityDto<long>
+    public class Create{{ model }}Output : EntityDto<long>
     {
     }
 }

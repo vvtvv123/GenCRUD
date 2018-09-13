@@ -1,15 +1,15 @@
 ﻿using Abp.Application.Services;
-using AbpSimpleCRUD.Clients.Dtos;
+using {{ project }}.{{ model }}s.Dtos;
 using System.Threading.Tasks;
 
-namespace AbpSimpleCRUD.Clients
+namespace {{ project }}.{{ model }}s
 {
-    public interface IClientAppService : IApplicationService
+    public interface I{{ model }}AppService : IApplicationService
     {
-        Task<CreateClientOutput> CreateClient(CreateClientInput input);
-        Task<UpdateClientOutput> UpdateClient(UpdateClientInput input);
-        Task DeleteClient(long id);
-        Task<GetClientByIdOutput> GetById(long id);
-        Task<GetAllClientsOutput> GetAllClients();
+        Task<Create{{ model }}Output> Create{{ model }}(Create{{ model }}Input input);
+        Task<Update{{ model }}Output> Update{{ model }}(Update{{ model }}Input input);
+        Task Delete{{ model }}(long id);
+        Task<Get{{ model }}ByIdOutput> GetById(long id);
+        Task<GetAll{{ model }}sOutput> GetAll{{ model }}s();
     }
 }

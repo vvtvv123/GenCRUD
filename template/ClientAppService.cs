@@ -2,7 +2,8 @@
 using System.Threading.Tasks;
 using Abp.AutoMapper;
 using {{ project }}.{{ model }}s.Dtos;
-using {{ project }}.Domain.{{ model }}s;
+using {{ project }}.{{ model }}s;
+using Microsoft.AspNetCore.Mvc;
 
 namespace {{ project }}.{{ model }}s
 {
@@ -15,7 +16,7 @@ namespace {{ project }}.{{ model }}s
             _{{ model }}Manager = {{ model }}Manager;
         }
 
-        //[HttpPost]
+        [HttpPost]
         public async Task<Create{{ model }}Output> Create{{ model }}(Create{{ model }}Input input)
         {
             var {{ model }} = input.MapTo<{{ model }}>();
