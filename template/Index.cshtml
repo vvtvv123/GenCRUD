@@ -1,7 +1,7 @@
-﻿@using AbpSimpleCRUD.Web.Startup
-@model AbpSimpleCRUD.Web.Models.Clients.ClientListViewModel
+﻿@using {{ project }}.Web.Startup
+@model {{ project }}.Web.Models.{{ model }}s.{{ model }}ListViewModel
 @{
-    ViewBag.CurrentPageName = PageNames.Clients;
+    ViewBag.CurrentPageName = PageNames.{{ model }}s;
 }
 
 <h2>index</h2>
@@ -12,23 +12,23 @@
     <table class="table">
         <thead>
             <tr>
-                <th>@L("FirstName")</th>
-                <th>@L("LastName")</th>
-                <th>@L("Age")</th>
+                {% for k,v in vars.items() %}
+                <th>@L("{{ k }}")</th>
+                {% endfor %}
             </tr>
         </thead>
         <tbody>
-            @foreach (var client in Model.Clients)
+            @foreach (var {{ model_lower }} in Model.{{ model }}s)
             {
-                <tr>
-                    <td>@client.FirstName</td>
-                    <td>@client.LastName</td>
-                    <td>@client.Age</td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@client.Id">Edit</a> |
-                        <a asp-action="Delete" asp-route-id="@client.Id">Delete</a>
-                    </td>
-                </tr>
+            <tr>
+                {% for k,v in vars.items() %}
+                <td>@{{ model_lower }}.{{ k }}</td>
+                {% endfor %}
+                <td>
+                    <a asp-action="Edit" asp-route-id="@{{ model_lower }}.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@{{ model_lower }}.Id">Delete</a>
+                </td>
+            </tr>
             }
         </tbody>
     </table>

@@ -1,10 +1,9 @@
 #!/usr/bin/python3
-# 
+#
 # Using the file system load
 #
 # We now assume we have a template dir in the same dir
 #
-
 import argparse
 import os
 from jinja2 import Environment, FileSystemLoader
@@ -45,7 +44,7 @@ def parse_model(file):
     required = []
     model = ""
 
-    # open file 
+    # open file
     with open(file) as f:
         content = f.readlines()
 
@@ -64,13 +63,12 @@ def parse_model(file):
     return model, vars, maxlen, required
 
 def gen_model(j2_env, model, vars, maxlen, required, project, filename):
-    return j2_env.get_template(filename).render(
-        project = project,
+    return j2_env.get_template(filename).render(project = project,
         model = model,
+        model_lower = model.lower(),
         maxlen = maxlen,
         vars = vars,
-        required = required
-    )
+        required = required)
 
 def check_dir(path):
     if not os.path.exists(path):
@@ -95,7 +93,7 @@ if __name__ == '__main__':
     print(args.path)
 
     # Create the jinja2 environment.
-    j2_env = Environment(loader=FileSystemLoader(THIS_DIR+"/template"),
+    j2_env = Environment(loader=FileSystemLoader(THIS_DIR + "/template"),
                          trim_blocks=True)
 
     project = args.project
@@ -104,25 +102,28 @@ if __name__ == '__main__':
     # file map, for GRUD, this reflects the basic code we have to create
     file_map = {
         '.Core': ['Client.cs', 'IClientManager.cs', 'ClientManager.cs'],
-        '.Application': ['ClientAppService.cs', 'IClientAppService.cs']        
+        '.Application': ['ClientAppService.cs', 'IClientAppService.cs']
     }
 
     special = {
-        '.Application\\'+model+'s\\Dtos': ['CreateClientInput.cs', 'CreateClientOutput.cs', 'GetAllClientsItem.cs',
+        '.Application\\' + model + 's\\Dtos': ['CreateClientInput.cs', 'CreateClientOutput.cs', 'GetAllClientsItem.cs',
                               'GetAllClientsOutput.cs', 'GetClientByIdOutput.cs', 'UpdateClientInput.cs',
-                              'UpdateClientOutput.cs']
+                              'UpdateClientOutput.cs'],
+        '.Web.Mvc\\Controllers': ['ClientsController.cs'],
+        '.Web.Mvc\\Models\\' + model + 's': ['ClientViewModel.cs', 'ClientListViewModel.cs'],
+        '.Web.Mvc\\Views\\' + model + 's': ['Create.cshtml', 'Delete.cshtml', 'Edit.cshtml', 'Index.cshtml']
     }
 
     for dir in file_map:
-        path = os.path.join(args.path, args.project+dir, model+"s")
+        path = os.path.join(args.path, args.project + dir, model + "s")
         print(path)
-        check_dir(os.path.join(args.path, args.project+dir))
+        check_dir(os.path.join(args.path, args.project + dir))
         for ff in file_map[dir]:
             content = gen_model(j2_env, model, vars, maxlen, required, project, ff)
             touch_file(content, path, str.replace(ff, 'Client', model))
 
     for dir in special:
-        path = os.path.join(args.path, args.project+dir)
+        path = os.path.join(args.path, args.project + dir)
         print(path)        
         for ff in special[dir]:
             content = gen_model(j2_env, model, vars, maxlen, required, project, ff)

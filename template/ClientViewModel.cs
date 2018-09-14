@@ -1,19 +1,22 @@
 ﻿using Abp.Application.Services.Dto;
 using System.ComponentModel.DataAnnotations;
+using System;
 
-namespace AbpSimpleCRUD.Web.Models.Clients
+namespace {{ project }}.Web.Models.{{ model }}s
 {
-    public class ClientViewModel : EntityDto<long>
+    public class {{ model }}ViewModel : EntityDto<long>
     {
-        private const int MaxNameSize = 32;
+        {% for k, v in maxlen.items() %}
+        public const int Max{{ k }}Length = {{ v }};
+        {% endfor %}
 
-        [Required]
-        [MaxLength(MaxNameSize)]
-        public string FirstName { get; set; }
+        {% for k,v in vars.items() %}
+        {% if k in required %}[Required]
+        {% endif %}
+        {% if k in maxlen %}[StringLength(Max{{ k }}Length)]
+        {% endif %}
+        public {{ v }} {{ k }} { get; set;}
 
-        [MaxLength(MaxNameSize)]
-        public string LastName { get; set; }
-
-        public int Age { get; set; }
+        {% endfor %}
     }
 }
