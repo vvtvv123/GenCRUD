@@ -1,4 +1,4 @@
-model:Problem
-vars:str Title, str Description, dt CreateTime, str Tag, str Category
-required: Title, Description, CreateTime
+model:Test
+vars:str Title, str Description, str Tag, str Category
+required: Title, Description
 maxlen: Title 256, Description 64*1024, Tag 256

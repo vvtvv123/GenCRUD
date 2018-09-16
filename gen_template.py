@@ -128,3 +128,6 @@ if __name__ == '__main__':
         for ff in special[dir]:
             content = gen_model(j2_env, model, vars, maxlen, required, project, ff)
             touch_file(content, path, str.replace(ff, 'Client', model))
+
+    print("Dont forget to add a line in %.Web.Mvc/Startup/PageNames.cs" % args.project)
+    print("Create auto mapper %s.Application/%sApplicationModule.cs" % (args.project, args.project))
