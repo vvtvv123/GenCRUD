@@ -1,4 +1,4 @@
-model:Test
-vars:str Title, str Description, str Tag, str Category
-required: Title, Description
-maxlen: Title 256, Description 64*1024, Tag 256
+model:ClassTask
+vars:str Title, str Content, int State
+required: Title, Content, State
+maxlen: Title 256, Content 64*1024

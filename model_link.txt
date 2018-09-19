@@ -1,0 +1,4 @@
+model:Link
+vars:str Title, str Url
+required: Title, Url
+maxlen: Title 256, Url 2048

@@ -1,0 +1,4 @@
+model:Book
+vars:str Title, str Description, str Tag, str Category, int Age, int Hours
+required: Title, Description
+maxlen: Title 256, Description 64*1024, Tag 256

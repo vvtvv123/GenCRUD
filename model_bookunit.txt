@@ -1,0 +1,4 @@
+model:BookUnit
+vars:str Title, str Description, str Tag, str Category, str Notes
+required: Title, Description
+maxlen: Title 256, Description 64*1024, Tag 256, Notes 64*1024
